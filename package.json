@@ -1,0 +1,19 @@
+{
+  "name": "cyclejs-xstream-playground",
+  "version": "0.0.1",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "start": "webpack --progress --watch",
+    "postinstall": "typings install"
+  },
+  "author": "Rafał Krupiński",
+  "license": "MIT",
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.10",
+    "html-webpack-plugin": "^2.22.0",
+    "ts-loader": "^0.8.2",
+    "typescript": "^1.8.10",
+    "webpack": "^1.13.1"
+  }
+}
