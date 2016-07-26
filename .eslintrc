@@ -1,0 +1,12 @@
+{
+  "root": true,
+  "rules": {
+    "no-param-reassign": ["error", { "props": false }]
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "extends": "airbnb/base"
+}

@@ -1,20 +1,25 @@
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: './src/index.js',
   output: {
     path: './build',
     filename: '[hash:6].app.js'
   },
-  resolve: {
-    extensions: ['', '.webpack.js', '.web.js', '.js', '.ts']
-  },
   module: {
     loaders: [
       {
-        test: /\.ts$/,
-        loader: 'ts-loader'
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel'
+      }
+    ],
+    preLoaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint'
       }
     ]
   },
