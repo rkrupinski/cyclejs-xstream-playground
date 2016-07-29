@@ -1,6 +1,5 @@
 function model(actions, initialData$) {
-  return initialData$
-      .remember();
+  return initialData$;
 }
 
 export default model;

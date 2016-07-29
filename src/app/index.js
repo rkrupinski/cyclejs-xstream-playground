@@ -6,15 +6,22 @@ import model from './model';
 import view from './view';
 
 import todoForm from '../todoForm';
+import todoList from '../todoList';
 import { serialize, deserialize } from '../utils';
 
 const STORAGE_KEY = '__todos';
 
 function ammendState(DOM) {
   return function mapFn(state) {
+    const { list, filter } = state;
+
     return {
       ...state,
       form: todoForm({ DOM }),
+      list: todoList({
+        DOM,
+        props$: xs.of({ list, filter }),
+      }),
     };
   };
 }
@@ -28,7 +35,7 @@ function app({ DOM, storage }) {
 
   const proxyActions$ = xs.create();
 
-  const actions = intent(DOM);
+  const actions = intent(DOM, proxyActions$);
 
   const state$ = model(actions, initialTodosData$);
 
@@ -37,8 +44,9 @@ function app({ DOM, storage }) {
       .remember();
 
   const actions$ = ammendedState$
-      .map(({ form }) => xs.merge(
-        form.action$
+      .map(({ form, list }) => xs.merge(
+        form.action$,
+        list.action$
       ))
       .compose(flattenConcurrently);
 

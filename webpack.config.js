@@ -5,31 +5,31 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: './build',
-    filename: '[hash:6].app.js'
+    filename: '[hash:6].app.js',
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel'
-      }
+        loader: 'babel',
+      },
     ],
     preLoaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'eslint'
-      }
-    ]
+        loader: 'eslint',
+      },
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(['build']),
     new HtmlWebpackPlugin({
       title: '💩',
       template: './src/index.html',
-      inject: 'body'
-    })
+      inject: 'body',
+    }),
   ],
-  devtool: '#source-map'
+  devtool: '#source-map',
 };

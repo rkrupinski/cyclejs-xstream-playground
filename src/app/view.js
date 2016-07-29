@@ -3,7 +3,6 @@ import { StyleSheet, css } from 'aphrodite';
 
 import { div } from '@cycle/dom';
 
-
 const styles = StyleSheet.create({
   app: {
     font: '.75rem sans-serif',
@@ -13,18 +12,18 @@ const styles = StyleSheet.create({
 function view(state$) {
   return state$
       .map(state => {
-        const { form } = state;
+        const { form, list } = state;
 
-        return xs.combine(form.DOM)
-            .map(([formTree]) => div(
+        return xs.combine(form.DOM, list.DOM)
+            .map(([formTree, listTree]) => div(
               `.${css(styles.app)}`,
               [
                 formTree,
+                listTree,
               ]
             ));
       })
-      .flatten()
-      .remember();
+      .flatten();
 }
 
 export default view;

@@ -3,3 +3,5 @@ export const deserialize = data$ => data$
     .map(data => ({ list: [], ...data }));
 
 export const serialize = state => JSON.stringify(state);
+
+export const identity = val => val;
