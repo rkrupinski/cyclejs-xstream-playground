@@ -9,15 +9,16 @@ function intent(DOM) {
         .events('input')
         .map(e => ({
           type: constants.FORM_INPUT,
-          body: e.target.value,
+          payload: e.target.value,
         })),
     DOM
         .select('.todo-form')
         .events('submit')
         .debug(e => e.preventDefault())
-        .mapTo({
+        .map(e => ({
           type: constants.FORM_SUBMIT,
-        })
+          payload: e.target.todo.value.trim(),
+        }))
   );
 }
 

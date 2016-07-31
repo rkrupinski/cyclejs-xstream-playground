@@ -1,9 +1,8 @@
-import xs from 'xstream';
+import { li } from '@cycle/dom';
 
-import { div } from '@cycle/dom';
-
-function view() {
-  return xs.of(div('foo'));
+function view(state$) {
+  return state$
+      .map(state => li([state.body]));
 }
 
 export default view;

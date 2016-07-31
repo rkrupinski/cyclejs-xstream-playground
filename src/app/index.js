@@ -1,5 +1,4 @@
 import xs from 'xstream';
-import flattenConcurrently from 'xstream/extra/flattenConcurrently';
 
 import intent from './intent';
 import model from './model';
@@ -26,7 +25,7 @@ function ammendState(DOM) {
   };
 }
 
-function app({ DOM, storage }) {
+function app({ DOM, storage, initialHash, hashChange }) {
   const localStorageData$ = storage.local
       .getItem(STORAGE_KEY)
       .take(1);
@@ -35,7 +34,7 @@ function app({ DOM, storage }) {
 
   const proxyActions$ = xs.create();
 
-  const actions = intent(DOM, proxyActions$);
+  const actions = intent(proxyActions$, initialHash, hashChange);
 
   const state$ = model(actions, initialTodosData$);
 
@@ -48,7 +47,7 @@ function app({ DOM, storage }) {
         form.action$,
         list.action$
       ))
-      .compose(flattenConcurrently);
+      .flatten();
 
   proxyActions$.imitate(actions$);
 

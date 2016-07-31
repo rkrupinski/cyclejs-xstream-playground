@@ -15,13 +15,7 @@ function view(state$) {
         const { form, list } = state;
 
         return xs.combine(form.DOM, list.DOM)
-            .map(([formTree, listTree]) => div(
-              `.${css(styles.app)}`,
-              [
-                formTree,
-                listTree,
-              ]
-            ));
+            .map(vtrees => div(`.${css(styles.app)}`, vtrees));
       })
       .flatten();
 }

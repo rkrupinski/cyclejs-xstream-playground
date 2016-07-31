@@ -6,6 +6,8 @@ function view(state$) {
         input('.todo-input', {
           props: {
             type: 'text',
+            name: 'todo',
+            autocomplete: 'off',
             value: state,
           },
         }),
