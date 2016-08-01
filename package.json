@@ -24,7 +24,7 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
-    "@cycle/dom": "10.0.0-rc33",
+    "@cycle/dom": "^12.0.3",
     "@cycle/isolate": "^1.4.0",
     "@cycle/storage": "^3.0.0-rc2",
     "@cycle/xstream-run": "^3.0.3",

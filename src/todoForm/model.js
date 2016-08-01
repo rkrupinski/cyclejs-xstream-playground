@@ -7,7 +7,7 @@ function model(action$) {
   return xs.merge(
     action$
         .filter(({ type }) => type === constants.FORM_INPUT)
-        .map(({ payload }) => payload),
+        .map(({ payload: { value } }) => value),
     action$
         .filter(({ type }) => type === constants.FORM_SUBMIT)
         .compose(delay(0))

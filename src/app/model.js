@@ -4,16 +4,35 @@ import { v4 } from 'node-uuid';
 function model(actions, initialData$) {
   const modifications$ = xs.merge(
     actions.addTodo$
-        .map(({ payload }) => data => ({
+        .map(({ payload: { body } }) => data => ({
           ...data,
           list: [
             ...data.list,
             {
               id: v4(),
               completed: false,
-              body: payload,
+              body,
             },
           ],
+        })),
+    actions.toggleTodo$
+        .map(({ payload: { id } }) => data => ({
+          ...data,
+          list: data.list.map(todo => {
+            if (todo.id !== id) {
+              return todo;
+            }
+
+            return {
+              ...todo,
+              completed: !todo.completed,
+            };
+          }),
+        })),
+    actions.deleteTodo$
+        .map(({ payload: { id } }) => data => ({
+          ...data,
+          list: data.list.filter(todo => todo.id !== id),
         }))
   );
 

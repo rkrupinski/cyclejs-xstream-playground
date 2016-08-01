@@ -9,7 +9,9 @@ function intent(DOM) {
         .events('input')
         .map(e => ({
           type: constants.FORM_INPUT,
-          payload: e.target.value,
+          payload: {
+            value: e.target.value,
+          },
         })),
     DOM
         .select('.todo-form')
@@ -17,7 +19,9 @@ function intent(DOM) {
         .debug(e => e.preventDefault())
         .map(e => ({
           type: constants.FORM_SUBMIT,
-          payload: e.target.todo.value.trim(),
+          payload: {
+            body: e.target.todo.value.trim(),
+          },
         }))
   );
 }

@@ -1,7 +1,5 @@
 import xs from 'xstream';
 
-import isolate from '@cycle/isolate';
-
 import intent from './intent';
 import model from './model';
 import view from './view';
@@ -13,8 +11,18 @@ function todoItem({ DOM, props$ }) {
 
   return {
     DOM: vtree$,
-    action$: xs.empty(),
+    action$: xs.combine(
+      action$,
+      props$
+    )
+        .map(([action, { id }]) => ({
+          ...action,
+          payload: {
+            ...action.payload,
+            id,
+          },
+        })),
   };
 }
 
-export default sources => isolate(todoItem)(sources);
+export default todoItem;

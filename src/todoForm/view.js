@@ -8,7 +8,13 @@ function view(state$) {
             type: 'text',
             name: 'todo',
             autocomplete: 'off',
-            value: state,
+          },
+          hook: {
+            update(...args) {
+              const [, { elm }] = args;
+
+              elm.value = state;
+            },
           },
         }),
         ' ',

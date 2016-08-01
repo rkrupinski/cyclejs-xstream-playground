@@ -22,24 +22,16 @@ function getFilterFn(filter) {
   }
 }
 
-function renderTodos(list, currentFilter) {
-  const filteredList = list
-      .filter(getFilterFn(currentFilter));
-
-  return filteredList.length ?
-      filteredList.map(data => data.todoItem.DOM) :
-      [p('Hooray, no todos!')];
-}
-
 function view(state$) {
   return state$
       .map(state => {
-        const { list, filter: currentFilter } = state;
+        const { list, filter } = state;
+        const filteredList = list.filter(getFilterFn(filter));
 
-        return ul(
+        return filteredList.length ? ul(
           `.${css(styles.todoList)}`,
-          renderTodos(list, currentFilter)
-        );
+          filteredList.map(data => data.todoItem.DOM)
+        ) : p('Hooray, no todos!');
       });
 }
 

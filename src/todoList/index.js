@@ -1,5 +1,7 @@
 import xs from 'xstream';
 
+import isolate from '@cycle/isolate';
+
 import model from './model';
 import view from './view';
 import todoItem from '../todoItem';
@@ -10,7 +12,7 @@ function ammendState(DOM) {
       ...state,
       list: state.list.map(data => ({
         ...data,
-        todoItem: todoItem({
+        todoItem: isolate(todoItem, data.id)({ // Fails when not scoped ¯\_(ツ)_/¯
           DOM,
           props$: xs.of(data),
         }),

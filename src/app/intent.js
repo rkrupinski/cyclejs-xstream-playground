@@ -9,21 +9,24 @@ function intent(actions$, initialHash, hashChange) {
       hashChange.map(e => e.newURL.split('#').pop())
     )
         .map(route => {
-          const [, payload] = /\/?([^#]*)$/.exec(route);
+          const [, filter] = /\/?([^#]*)$/.exec(route);
 
           return {
             type: constants.ROUTE_CHANGE,
-            payload,
+            payload: { filter },
           };
         }),
-
     addTodo$: actions$
-        .filter(({ type, payload }) =>
-            type === constants.FORM_SUBMIT && !!payload)
+        .filter(({ type, payload: { body } }) =>
+            type === constants.FORM_SUBMIT && !!body)
         .map(action => ({
           ...action,
-          type: constants.ADD_TODO,
+          type: constants.TODO_ADD,
         })),
+    toggleTodo$: actions$
+        .filter(({ type }) => type === constants.TODO_TOGGLE),
+    deleteTodo$: actions$
+        .filter(({ type }) => type === constants.TODO_DELETE),
   };
 }
 
