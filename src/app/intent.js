@@ -27,6 +27,9 @@ function intent(actions$, initialHash, hashChange) {
         .filter(({ type }) => type === constants.TODO_TOGGLE),
     deleteTodo$: actions$
         .filter(({ type }) => type === constants.TODO_DELETE),
+    updateTodo$: actions$
+        .filter(({ type, payload: { body } }) =>
+            type === constants.TODO_DONE_EDITING && !!body),
   };
 }
 

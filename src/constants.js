@@ -11,6 +11,9 @@ const constants = {
   FILTER_ALL: '',
   FILTER_PENDING: 'pending',
   FILTER_COMPLETED: 'completed',
+
+  ENTER_KEY: 13,
+  ESCAPE_KEY: 27,
 };
 
 export default constants;

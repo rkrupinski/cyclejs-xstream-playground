@@ -1,4 +1,5 @@
 import xs from 'xstream';
+import delay from 'xstream/extra/delay';
 
 import constants from '../constants';
 
@@ -12,6 +13,7 @@ function model(props$, action$) {
         .mapTo(false),
     action$
         .filter(({ type }) => type === constants.TODO_CANCEL_EDITING)
+        .compose(delay(0))
         .mapTo(false)
   )
       .startWith(false);

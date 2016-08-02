@@ -33,6 +33,20 @@ function model(actions, initialData$) {
         .map(({ payload: { id } }) => data => ({
           ...data,
           list: data.list.filter(todo => todo.id !== id),
+        })),
+    actions.updateTodo$
+        .map(({ payload: { id, body } }) => data => ({
+          ...data,
+          list: data.list.map(todo => {
+            if (todo.id !== id) {
+              return todo;
+            }
+
+            return {
+              ...todo,
+              body,
+            };
+          }),
         }))
   );
 

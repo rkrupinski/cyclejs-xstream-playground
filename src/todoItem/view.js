@@ -26,32 +26,23 @@ function view(state$) {
             checked: completed,
           },
         }),
-        ' ',
-        span(`.${css(styles.todoBody)}.todo-body`, {
+        !editing ? span(`.${css(styles.todoBody)}.todo-body`, {
           props: {
             title: 'Edit',
           },
-          style: editing ? { display: 'none' } : null,
-        }, body),
-        input('.todo-input', {
+        }, body) : ' ',
+        editing ? input('.todo-input', {
           props: {
             type: 'text',
           },
-          style: !editing ? { display: 'none' } : null,
           hook: {
-            update(...args) {
-              const [, { elm }] = args;
-
+            insert({ elm }) {
               elm.value = body;
-
-              if (editing) {
-                elm.focus();
-                elm.selectionStart = body.length;
-              }
+              elm.focus();
+              elm.selectionStart = body.length;
             },
           },
-        }),
-        ' ',
+        }) : ' ',
         button('.todo-delete', 'x'),
       ]));
 }
