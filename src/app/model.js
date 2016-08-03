@@ -64,6 +64,11 @@ function model(actions, initialData$) {
         .map(() => data => ({
           ...data,
           list: data.list.filter(({ completed }) => !completed),
+        })),
+    actions.routeChange$
+        .map(({ payload: { filter } }) => data => ({
+          ...data,
+          filter,
         }))
   );
 

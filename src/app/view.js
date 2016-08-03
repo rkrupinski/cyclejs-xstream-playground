@@ -12,9 +12,9 @@ const styles = StyleSheet.create({
 function view(state$) {
   return state$
       .map(state => {
-        const { form, list, toolbar } = state;
+        const { form, list, toolbar, nav } = state;
 
-        return xs.combine(form.DOM, list.DOM, toolbar.DOM)
+        return xs.combine(form.DOM, list.DOM, toolbar.DOM, nav.DOM)
             .map(vtrees => div(`.${css(styles.app)}`, vtrees));
       })
       .flatten();

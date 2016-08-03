@@ -4,6 +4,7 @@ import model from './model';
 import view from './view';
 import toggleAllBtn from '../toggleAllBtn';
 import clearCompletedBtn from '../clearCompletedBtn';
+import itemsLeft from '../itemsLeft';
 
 function ammendState(DOM) {
   return function mapFn(state) {
@@ -25,6 +26,11 @@ function ammendState(DOM) {
         DOM,
         props$: xs.of({
           disabled: !completedCount,
+        }),
+      }),
+      itemsLeft: itemsLeft({
+        props$: xs.of({
+          pending: list.length - completedCount,
         }),
       }),
     };

@@ -7,6 +7,7 @@ import view from './view';
 import todoForm from '../todoForm';
 import todoList from '../todoList';
 import todoListToolbar from '../todoListToolbar';
+import todoNav from '../todoNav';
 import { serialize, deserialize } from '../utils';
 
 const STORAGE_KEY = '__todos';
@@ -25,6 +26,9 @@ function ammendState(DOM) {
       toolbar: todoListToolbar({
         DOM,
         props$: xs.of({ list }),
+      }),
+      nav: todoNav({
+        props$: xs.of({ filter }),
       }),
     };
   };

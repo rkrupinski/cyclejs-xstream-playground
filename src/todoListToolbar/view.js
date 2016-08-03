@@ -12,16 +12,19 @@ const styles = StyleSheet.create({
 function view(state$) {
   return state$
       .map(state => {
-        const { toggleBtn, clearBtn } = state;
+        const { toggleBtn, clearBtn, itemsLeft } = state;
 
-        return xs.combine(toggleBtn.DOM, clearBtn.DOM)
+        return xs.combine(toggleBtn.DOM, clearBtn.DOM, itemsLeft.DOM)
             .map(([
               toggleBtnTree,
               clearBtnTree,
+              itemsLeftTree,
             ]) => div(`.${css(styles.toolbar)}`, [
               toggleBtnTree,
               ' ',
               clearBtnTree,
+              ' ',
+              itemsLeftTree,
             ]));
       });
 }
