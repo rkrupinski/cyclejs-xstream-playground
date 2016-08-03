@@ -26,11 +26,12 @@ function view(state$) {
             checked: completed,
           },
         }),
+        ' ',
         !editing ? span(`.${css(styles.todoBody)}.todo-body`, {
           props: {
             title: 'Edit',
           },
-        }, body) : ' ',
+        }, body) : null,
         editing ? input('.todo-input', {
           props: {
             type: 'text',
@@ -42,7 +43,8 @@ function view(state$) {
               elm.selectionStart = body.length;
             },
           },
-        }) : ' ',
+        }) : null,
+        ' ',
         button('.todo-delete', 'x'),
       ]));
 }

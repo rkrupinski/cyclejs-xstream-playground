@@ -47,7 +47,19 @@ function model(actions, initialData$) {
               body,
             };
           }),
-        }))
+        })),
+    actions.toggleAll$
+        .map(() => data => {
+          const pending = data.list.some(({ completed }) => !completed);
+
+          return {
+            ...data,
+            list: data.list.map(todo => ({
+              ...todo,
+              completed: pending,
+            })),
+          };
+        })
   );
 
   return initialData$

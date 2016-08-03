@@ -17,7 +17,7 @@ function intent(actions$, initialHash, hashChange) {
           };
         }),
     addTodo$: actions$
-        .filter(({ type, payload: { body } }) =>
+        .filter(({ type, payload: { body } = {} }) =>
             type === constants.FORM_SUBMIT && !!body)
         .map(action => ({
           ...action,
@@ -28,8 +28,10 @@ function intent(actions$, initialHash, hashChange) {
     deleteTodo$: actions$
         .filter(({ type }) => type === constants.TODO_DELETE),
     updateTodo$: actions$
-        .filter(({ type, payload: { body } }) =>
+        .filter(({ type, payload: { body } = {} }) =>
             type === constants.TODO_DONE_EDITING && !!body),
+    toggleAll$: actions$
+        .filter(({ type }) => type === constants.TODO_TOGGLE_ALL),
   };
 }
 

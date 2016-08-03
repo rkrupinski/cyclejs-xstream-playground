@@ -6,6 +6,7 @@ import view from './view';
 
 import todoForm from '../todoForm';
 import todoList from '../todoList';
+import todoListToolbar from '../todoListToolbar';
 import { serialize, deserialize } from '../utils';
 
 const STORAGE_KEY = '__todos';
@@ -20,6 +21,10 @@ function ammendState(DOM) {
       list: todoList({
         DOM,
         props$: xs.of({ list, filter }),
+      }),
+      toolbar: todoListToolbar({
+        DOM,
+        props$: xs.of({ list }),
       }),
     };
   };
@@ -43,9 +48,10 @@ function app({ DOM, storage, initialHash, hashChange }) {
       .remember();
 
   const actions$ = ammendedState$
-      .map(({ form, list }) => xs.merge(
+      .map(({ form, list, toolbar }) => xs.merge(
         form.action$,
-        list.action$
+        list.action$,
+        toolbar.action$
       ))
       .flatten();
 

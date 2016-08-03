@@ -4,20 +4,19 @@ import { StyleSheet, css } from 'aphrodite';
 import { div } from '@cycle/dom';
 
 const styles = StyleSheet.create({
-  app: {
-    font: '.75rem sans-serif',
+  toolbar: {
+    marginBottom: 10,
   },
 });
 
 function view(state$) {
   return state$
       .map(state => {
-        const { form, list, toolbar } = state;
+        const { toggleBtn } = state;
 
-        return xs.combine(form.DOM, list.DOM, toolbar.DOM)
-            .map(vtrees => div(`.${css(styles.app)}`, vtrees));
-      })
-      .flatten();
+        return xs.combine(toggleBtn.DOM)
+            .map(vtrees => div(`.${css(styles.toolbar)}`, vtrees));
+      });
 }
 
 export default view;
