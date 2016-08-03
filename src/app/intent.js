@@ -32,6 +32,8 @@ function intent(actions$, initialHash, hashChange) {
             type === constants.TODO_DONE_EDITING && !!body),
     toggleAll$: actions$
         .filter(({ type }) => type === constants.TODO_TOGGLE_ALL),
+    clearCompleted$: actions$
+        .filter(({ type }) => type === constants.TODO_CLEAR_COMPLETED),
   };
 }
 

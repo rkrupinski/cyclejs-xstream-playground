@@ -59,7 +59,12 @@ function model(actions, initialData$) {
               completed: pending,
             })),
           };
-        })
+        }),
+    actions.clearCompleted$
+        .map(() => data => ({
+          ...data,
+          list: data.list.filter(({ completed }) => !completed),
+        }))
   );
 
   return initialData$
